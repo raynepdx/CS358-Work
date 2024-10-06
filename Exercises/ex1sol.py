@@ -98,3 +98,60 @@ if - (subtraction) has the highest precedence, followed by addition, then multip
 
 
 
+#Exercise 1.5
+class ASTNode:
+    def __init__(self, value, left = None, right = None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+    def evaluate(self):
+        raise NotImplementedError
+    
+class addNode(ASTNode):
+    def __init__(self, left, right):
+        super().__init__('+', left, right)
+
+    def evaluate(self):
+        return self.left.evaluate() + self.right.evaluate()
+    
+class subNode(ASTNode):
+    def __init__(self, left, right):
+        super().__init__('-', left, right)
+
+    def evaluate(self):
+        return self.left.evaluate() - self.right.evaluate()
+    
+class mulNode(ASTNode):
+    def __init__(self, left, right):
+        super().__init__('*', left, right)
+
+    def evaluate(self):
+        return self.left.evaluate() * self.right.evaluate()
+    
+
+class xorNode(ASTNode):
+    def __init__(self, left, right):
+        super().__init__('^', left, right)
+
+    def evaluate(self):
+        return self.left.evaluate() ^ self.right.evaluate()
+    
+
+class numNode(ASTNode):
+    def __init__(self, value):
+        super().__init__(value)
+
+    def evaluate(self):
+        return self.value
+    
+
+ast_c_language = subNode(addNode(numNode(1), mulNode(numNode(2), xorNode(numNode(3), numNode(4))), numNode(5)))
+ast_x_language = xorNode(mulNode(addNode(numNode(1), subNode(numNode(5), numNode(3))), numNode(2), numNode(3)))
+
+result_c_language = ast_c_language.evaluate()
+result_x_language = ast_x_language.evaluate()
+
+print(f"Result of C language expression: {result_c_language}")
+print(f"Result of X language expression: {result_x_language}")
+                         
