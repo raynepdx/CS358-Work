@@ -1,0 +1,4 @@
+call_by_value: 3 2 1
+call_by_reference: 4 2 2
+call_by_value_result: 3 2 3 
+call_by_name: 4 4 4
