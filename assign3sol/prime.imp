@@ -1,0 +1,17 @@
+var bound = 10;
+for i in [2..bound]
+{
+    var is_prime = 1;
+
+    for j in [2..i]
+    {
+        if(j < i && i % j == 0)
+        {
+            is_prime = 0;
+        }
+    }
+    if(is_prime == 1)
+    {
+        print(i);
+    }
+}
